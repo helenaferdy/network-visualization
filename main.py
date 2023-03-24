@@ -16,13 +16,12 @@ with open(CSV_PATH, mode='r') as csv_file:
 #initialize object
 devices = []
 for d in data:
-    new_router = Device(
+    new_d = Device(
         d['source'],
         d['target'],
-        d['weight'],
-        d['int']
+        d['weight']
     )
-    devices.append(new_router)
+    devices.append(new_d)
 
 #initialize object's neighbor
 for d in data:

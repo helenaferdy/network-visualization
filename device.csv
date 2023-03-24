@@ -3,6 +3,7 @@ xe1,xe2,1,GigabitEthernet1
 xe1,xr1,1,GigabitEthernet1
 xe1,ce-a1,1,GigabitEthernet1
 xe1,cedge0,1,GigabitEthernet1
+xe1,wan,1,GigabitEthernet1
 xe2,xe1,1,GigabitEthernet1
 xe2,xe3,1,GigabitEthernet2
 xe3,xe2,1,GigabitEthernet3

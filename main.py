@@ -1,6 +1,6 @@
 from pyvis.network import Network
 
-# create a network
+
 net = Network()
 
 # add nodes

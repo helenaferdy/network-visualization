@@ -11,9 +11,9 @@ class Device:
 
         self.neighbor = []
 
-    def add_neighbor(self, new_neigh):
-        self.new_neigh = new_neigh
-        self.neighbor.append(new_neigh)
+    def add_neighbor(self, new_neighbor):
+        self.neighbor.append(new_neighbor)
+
 
 net = Network(height='1000px', width='100%', bgcolor='#222222', font_color='white')
 # net.show_buttons(filter_=['nodes'])
@@ -26,21 +26,17 @@ with open(CSV_PATH, mode='r') as csv_file:
 #initialize object
 devices = []
 for d in data:
-    new_d = Device(
-        d['source'],
-        d['target'],
-        d['weight']
-    )
+    new_d = Device(d['source'], d['target'], d['weight'])
     devices.append(new_d)
 
 #initialize object's neighbor
 for d in data:
     for dd in devices:
         if d['source'] == dd.source:
-            new_neigh = []
-            new_neigh.append(d['int']+' -> ')
-            new_neigh.append(d['target']+'\n')
-            dd.add_neighbor(new_neigh)
+            new_neighbor = []
+            new_neighbor.append(d['int'] + ' -> ')
+            new_neighbor.append(d['target'] + '\n')
+            dd.add_neighbor(new_neighbor)
 
 #create node
 for dd in devices:

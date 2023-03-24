@@ -16,7 +16,7 @@ net.add_edges([(2,3)])
 net.add_edges([(1,4)])
 
 # show the network
-net.show("my_network.html")
+net.show("index.html")
 
 from IPython.core.display import display, HTML
-display(HTML("my_network.html"))
+display(HTML("index.html"))

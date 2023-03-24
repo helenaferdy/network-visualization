@@ -1,22 +1,53 @@
 from pyvis.network import Network
+import pandas as pd
+import csv
+from device import Device
 
-s
-net = Network()
+CSV_PATH = 'device.csv'
 
-# add nodes
-net.add_node(1, label="Node 1")
-net.add_node(2, label="Node 2")
-net.add_node(3, label="Node 3")
-net.add_node(4, label="Node 4")
-net.add_edges([(1,2)])
-net.add_edges([(1,3)])
-net.add_edges([(1,4)])
-net.add_edges([(2,1)])
-net.add_edges([(2,3)])
-net.add_edges([(1,4)])
+net = Network(height='1000px', width='100%', bgcolor='#222222', font_color='white')
+# net.show_buttons(filter_=['nodes'])
 
-# show the network
+#open csv
+with open(CSV_PATH, mode='r') as csv_file:
+    csv_reader = csv.DictReader(csv_file)
+    data = [row for row in csv_reader]
+
+#initialize object
+devices = []
+for d in data:
+    new_router = Device(
+        d['source'],
+        d['target'],
+        d['weight'],
+        d['int']
+    )
+    devices.append(new_router)
+
+#initialize object's neighbor
+for d in data:
+    for dd in devices:
+        if d['source'] == dd.source:
+            new_neigh = []
+            new_neigh.append(d['int']+' -> ')
+            new_neigh.append(d['target']+'\n')
+            dd.add_neighbor(new_neigh)
+
+#create node
+for dd in devices:
+    net.add_node(dd.source, dd.source, title=dd.source)
+    net.add_node(dd.target, dd.target, title=dd.target)
+    net.add_edge(dd.source, dd.target, value=dd.weight)
+
+#add neighbor description
+for node in net.nodes:
+    for dd in devices:
+        if node['id'] == dd.source and node['title'] == dd.source:
+            node['title'] = ""
+            for n in dd.neighbor:
+                for nn in n:
+                    node['title'] += nn
+
+
+
 net.show("index.html")
-
-from IPython.core.display import display, HTML
-display(HTML("index.html"))

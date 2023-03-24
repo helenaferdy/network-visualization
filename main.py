@@ -1,9 +1,19 @@
 from pyvis.network import Network
-import pandas as pd
 import csv
-from device import Device
 
 CSV_PATH = 'device.csv'
+
+class Device:
+    def __init__(self, source, target, weight):
+        self.source = source
+        self.target = target
+        self.weight = weight
+
+        self.neighbor = []
+
+    def add_neighbor(self, new_neigh):
+        self.new_neigh = new_neigh
+        self.neighbor.append(new_neigh)
 
 net = Network(height='1000px', width='100%', bgcolor='#222222', font_color='white')
 # net.show_buttons(filter_=['nodes'])
@@ -46,7 +56,5 @@ for node in net.nodes:
             for n in dd.neighbor:
                 for nn in n:
                     node['title'] += nn
-
-
 
 net.show("index.html")
